@@ -1,1 +1,1 @@
-let lista = [];
+const cart = [];

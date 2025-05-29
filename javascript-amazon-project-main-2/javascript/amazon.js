@@ -56,7 +56,8 @@ document.querySelector(".products-grid").innerHTML = htmlkod;
 
 document.querySelector(".add-to-cart-button").addEventListener('click',()=>{
     console.log(this.document.querySelector(".product-name").innerHTML);
-    this.document.querySelector(".added-to-cart").style.opacity = 100;
+    product_container = this.closest("product-container");
+    product_container.querySelector(".added-to-cart").style.opacity = 100;
     if(document.querySelector(".cart-quantity").innerHTML == 0){
       document.querySelector(".cart-quantity").innerHTML = 1;
     }else{
