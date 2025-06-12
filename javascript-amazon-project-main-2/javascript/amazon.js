@@ -1,3 +1,7 @@
+import {cart} from '../data/cart.js';
+import {products} from '../data/products.js';
+
+countCartQuantity();
 //console.log("Hozzá van csatolva!");
 let htmlkod = "";
 products.forEach((item)=>{
@@ -46,7 +50,7 @@ products.forEach((item)=>{
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${item.id}">
             Add to Cart
           </button>
         </div>`;
@@ -54,7 +58,7 @@ products.forEach((item)=>{
 //console.log(htmlkod);
 document.querySelector(".products-grid").innerHTML = htmlkod;
 
-document.querySelector(".add-to-cart-button").addEventListener('click',()=>{
+/*document.querySelector(".add-to-cart-button").addEventListener('click',()=>{
     console.log(this.document.querySelector(".product-name").innerHTML);
     product_container = this.closest("product-container");
     product_container.querySelector(".added-to-cart").style.opacity = 100;
@@ -64,7 +68,27 @@ document.querySelector(".add-to-cart-button").addEventListener('click',()=>{
       document.querySelector(".cart-quantity").innerHTML = Number(document.querySelector(".cart-quantity").innerHTML) += 1;
     }
 
-  });
+  });*/
+document.querySelectorAll('.js-add-to-cart').forEach((gomb)=>{
+  gomb.addEventListener('click',()=>{
+    cart.push(gomb.dataset.productId);
+    localStorage.setItem('AmCart',JSON.stringify(cart));
+    countCartQuantity();
+    
+  })
+  //console.log(gomb.dataset.productId);
+});
+
+function countCartQuantity(){
+    let cartQuantity = 0;
+    console.log(cart);
+    cart.forEach((item)=>{
+      cartQuantity++;
+    })
+    document.querySelector(".cart-quantity").innerHTML = cartQuantity;
+    console.log(cartQuantity);
+    console.log("lefut");
+}
 
 
 
